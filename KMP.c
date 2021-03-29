@@ -50,26 +50,35 @@ int main(){
 	char fname[20];
 	scanf("%s",fname);
 	FILE *fp=NULL;
-	fp=fopen(fname,"rt");
+
+	fp=fopen(fname,"rw");
 	if(fp==NULL)
 	{
 		fprintf(stderr,"file open error \n");
 		exit(1);
 	}
 	char buf[1024];
+	
+	scanf("%s",buf);
+	fwrite(buf,sizeof(char),strlen(buf),fp);
+	fseek(fp,0,SEEK_SET);
 
 	fgets(buf,1024,fp);
+	
 	char pat[1024];
 	scanf("%s",pat);
-
+	
+	printf("\n\nfailure function\n");
 	output(pat);
 	fail(pat);
-	if(match(buf,pat)==-1)
+	int mat=match(buf,pat);
+	
+	if(mat==-1)
 	{
 		printf("\nthe pattern %s is not found \n",pat);
 	}
 	else
-		printf("\nthe pattern %s is found at the position %ld \n",pat,strlen(buf));
+		printf("\nthe pattern %s is found at the position %d \n",pat,mat);
 
 	exit(0);
 }
