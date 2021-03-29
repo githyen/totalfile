@@ -51,7 +51,7 @@ int main(){
 	scanf("%s",fname);
 	FILE *fp=NULL;
 
-	fp=fopen(fname,"rw");
+	fp=fopen(fname,"w+");
 	if(fp==NULL)
 	{
 		fprintf(stderr,"file open error \n");
