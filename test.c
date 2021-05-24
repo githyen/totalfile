@@ -87,7 +87,7 @@ void get_data(char *fname)
 	
 	fclose(fp);
 	fp = NULL;
-	printf("紐뉗꽭? 吏꾪뻾 ?섏떆寃좎뒿?덇퉴?");
+	printf("몇세대 진행 하시겠습니까?");
 	scanf("%d",&n);
 	serial_processing(g,n);
 	return;
@@ -112,14 +112,14 @@ int main(int argc, char **argv){
 		if(c==1) { break; }
 		if(c==2) {	get_data(argv[1]); free_g(g); }
 		if(c==3) {
-			printf("紐뉕컻???꾨줈?몄뒪瑜??앹꽦?섏떆寃좎뒿?덇퉴?"); 
+			printf("몇개의 프로세스를 생성하시겠습니까?"); 
 			scanf("%d",&child);
 			putchar('\n');
 		}
 		if(c==4)
 		{
 			
-			printf("紐뉕컻???곕젅?쒕? ?앹꽦?섏떆寃좎뒿?덇퉴?"); 
+			printf("몇개의 쓰레드를 생성하시겠습니까?"); 
 			scanf("%d",&child);
 			putchar('\n');
 		}
