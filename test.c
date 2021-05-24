@@ -18,44 +18,39 @@ void get_menu()
 {
 	printf("1.Program End\n2.Serial Processing\n3.Process Parallel Processing\n4.Thread Parallel Processing\n");
 }
-	
-void set_Edge(Graph *g);
 
 int get_value(Graph *g,int r, int c);
 int get_neighbor(Graph *g,int r, int c);
 void get_data(char *fname);
 
-void serial_processing(Graph *g);
+void serial_processing(Graph *g,int n);
+void parallel_processing(Graph *g, int n);
+void parallel_thread(Graph *g, int n);
 
-char* gen_choose()
+void push_data(Graph *g,int n)
 {
-	char choose;
-	static char name[]="gen0.matrix";
 
-	printf(" 몇세대 진행 하시겠습니까?");
-	scanf(" %c",&choose);
 
-	for(char i='1'; i<=choose; i++)
+	static char i='1';
+	FILE *fp=NULL;
+	static char fname[]="gen_0.matrix";
+
+	fname[4]=i;
+
+	if((fp=fopen(fname,"wt"))==NULL)
 	{
-		name[3]=i;
-		if(i==choose) { memcpy(name,"output.matrix",14); }
-		return name;
+		perror("error");
+		exit(1);
 	}
-}
-		
-void push_data(Graph *g)
-{
-	 char *str=gen_choose();
 
-	 if((fp=fopen(str,"w+"))==NULL)
-	 {
-		 perror("error");
-		 exit(1);
-	 }
-
-	 fwrite(g,sizeof(g->matrix),1,fp);
-	 fclose(fp);
-
+	for(int i=0; i<g->r; i++)
+	{
+		for(int j=0; j<g->w; j++)
+			fprintf(fp,"%d ",g->matrix[i][j]);
+		fprintf(fp,"\n");
+	}
+	fclose(fp);
+	i++;
 }
 
 void get_data(char *fname)
@@ -65,7 +60,7 @@ void get_data(char *fname)
     fp=fopen(fname,"rt");
     
 	int fd=fileno(fp);
-
+	int n;
     if ((fd = open(fname,O_RDONLY)) < 0) {
             fprintf(stderr,"open error \n");
 			exit(1);
@@ -92,7 +87,9 @@ void get_data(char *fname)
 	
 	fclose(fp);
 	fp = NULL;
-	serial_processing(g);
+	printf("紐뉗꽭? 吏꾪뻾 ?섏떆寃좎뒿?덇퉴?");
+	scanf("%d",&n);
+	serial_processing(g,n);
 	return;
 	
 
@@ -106,15 +103,28 @@ int main(int argc, char **argv){
 		exit(1);
 	}
 	int c;
+	int child;
 	while(1)
 	{
 		get_menu();
 		scanf("%d",&c);
 
 		if(c==1) { break; }
-		if(c==2) {	get_data(argv[1]); }
+		if(c==2) {	get_data(argv[1]); free_g(g); }
+		if(c==3) {
+			printf("紐뉕컻???꾨줈?몄뒪瑜??앹꽦?섏떆寃좎뒿?덇퉴?"); 
+			scanf("%d",&child);
+			putchar('\n');
+		}
+		if(c==4)
+		{
+			
+			printf("紐뉕컻???곕젅?쒕? ?앹꽦?섏떆寃좎뒿?덇퉴?"); 
+			scanf("%d",&child);
+			putchar('\n');
+		}
 	}
-	free_g(g);
+//	free_g(g);
    	exit(0);
 }
 
@@ -156,8 +166,10 @@ int get_neighbor(Graph *g,int r,int c)
 }
 
 
-void serial_processing(Graph *g){
+void serial_processing(Graph *g,int n){
 	
+
+	if(n==0) return;
 	int count=0;
 
 	for(int i=0; i<g->r; i++)
@@ -180,10 +192,18 @@ void serial_processing(Graph *g){
 				else
 					g->tmp[i][j]=DEATH;
 			}
-
 		}
 	}
-	push_data(g);
+#if 1
+	for(int i=0; i<g->r; i++)
+	{
+		for(int j=0; j<g->w; j++)
+			g->matrix[i][j]=g->tmp[i][j];
+	}
+#endif
+	push_data(g,n);
+	serial_processing(g,n-1);
+
 }
 
 Graph *init(int r, int w)
