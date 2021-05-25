@@ -13,6 +13,7 @@
 static Graph *g=NULL;
 static FILE *fp=NULL;
 static int r=0,w=0;
+static char i='1';
 
 void get_menu()
 {
@@ -31,13 +32,12 @@ void push_data(Graph *g,int n)
 {
 
 
-	static char i='1';
 	FILE *fp=NULL;
-	static char fname[]="gen_0.matrix";
+	char fname[]="gen_1.matrix";
 
 	fname[4]=i;
 
-	if((fp=fopen(fname,"wt"))==NULL)
+	if((fp=fopen(fname,"w"))==NULL)
 	{
 		perror("error");
 		exit(1);
@@ -110,11 +110,12 @@ int main(int argc, char **argv){
 		scanf("%d",&c);
 
 		if(c==1) { break; }
-		if(c==2) {	get_data(argv[1]); free_g(g); }
+		if(c==2) {	get_data(argv[1]); free_g(g); i='1';}
 		if(c==3) {
 			printf("몇개의 프로세스를 생성하시겠습니까?"); 
 			scanf("%d",&child);
 			putchar('\n');
+			get_data(argv[1]); free_g(g); 
 		}
 		if(c==4)
 		{
@@ -172,9 +173,6 @@ void serial_processing(Graph *g,int n){
 	if(n==0) return;
 	int count=0;
 
-	for(int i=0; i<g->r; i++)
-		memset(g->tmp[i],0,sizeof(int)*g->r);
-
 	for(int i=1; i<g->r-1; i++)
 	{
 		for(int j=1; j<g->w-1; j++)
@@ -213,13 +211,13 @@ Graph *init(int r, int w)
 		new->r=r;
 		new->w=w;
 		
-		new->matrix=(int **)calloc(new->r,sizeof(int *));
-		new->tmp=(int **)calloc(new->r,sizeof(int *));
+		new->matrix=(int **)calloc(new->r , sizeof(int *));
+		new->tmp=(int **)calloc(new->r , sizeof(int *));
 
 		for(int i=0; i<new->r; i++)
 		{
-				new->matrix[i] = (int *)calloc(new->w,sizeof(int));
-				new->tmp[i] = (int *)calloc(new->w,sizeof(int));
+				new->matrix[i] = (int *)calloc(new->w , sizeof(int));
+				new->tmp[i] = (int *)calloc(new->w , sizeof(int));
 		}
 		return new;
 }
