@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<sys/wait.h>
 #include<fcntl.h>
 #include<stdlib.h>
 #include<string.h>
@@ -25,16 +26,16 @@ int get_neighbor(Graph *g,int r, int c);
 void get_data(char *fname);
 
 void serial_processing(Graph *g,int n);
-void parallel_processing(Graph *g, int n);
-void parallel_thread(Graph *g, int n);
+void parallel_processing(int child,int n);
+void parallel_thread(int child, int n);
 
 void push_data(Graph *g,int n)
 {
 
-
+	
 	FILE *fp=NULL;
 	char fname[]="gen_1.matrix";
-
+	
 	fname[4]=i;
 
 	if((fp=fopen(fname,"w"))==NULL)
@@ -50,7 +51,9 @@ void push_data(Graph *g,int n)
 		fprintf(fp,"\n");
 	}
 	fclose(fp);
+	fp=NULL;
 	i++;
+
 }
 
 void get_data(char *fname)
@@ -60,7 +63,6 @@ void get_data(char *fname)
     fp=fopen(fname,"rt");
     
 	int fd=fileno(fp);
-	int n;
     if ((fd = open(fname,O_RDONLY)) < 0) {
             fprintf(stderr,"open error \n");
 			exit(1);
@@ -87,9 +89,6 @@ void get_data(char *fname)
 	
 	fclose(fp);
 	fp = NULL;
-	printf("몇세대 진행 하시겠습니까?");
-	scanf("%d",&n);
-	serial_processing(g,n);
 	return;
 	
 
@@ -102,7 +101,7 @@ int main(int argc, char **argv){
 		perror("error");
 		exit(1);
 	}
-	int c;
+	int c,n;
 	int child;
 	while(1)
 	{
@@ -110,23 +109,62 @@ int main(int argc, char **argv){
 		scanf("%d",&c);
 
 		if(c==1) { break; }
-		if(c==2) {	get_data(argv[1]); free_g(g); i='1';}
+		if(c==2) {	
+
+			get_data(argv[1]); 
+			printf("몇세대 진행 하시겠습니까?");
+			scanf("%d",&n);
+			serial_processing(g,n);
+			free_g(g); 
+	//		printf("%c \n",i);
+		}
 		if(c==3) {
+			
+			printf("몇세대 진행 하시겠습니까?");
+			scanf("%d",&n);
+
 			printf("몇개의 프로세스를 생성하시겠습니까?"); 
 			scanf("%d",&child);
-			putchar('\n');
-			get_data(argv[1]); free_g(g); 
+			parallel_processing(child,n);
 		}
 		if(c==4)
 		{
-			
-			printf("몇개의 쓰레드를 생성하시겠습니까?"); 
+			printf("몇세대 진행 하시겠습니까?");
+			scanf("%d",&n);
+
+			printf("몇개의 프로세스를 생성하시겠습니까?"); 
 			scanf("%d",&child);
-			putchar('\n');
+			parallel_thread(child,n);
+
 		}
 	}
-//	free_g(g);
    	exit(0);
+}
+
+void parallel_processing(int child,int n)
+{
+
+	pid_t pid;
+	int stat;
+	for(int i=0; i<child; i++)
+	{
+		if((pid=fork()) < 0)
+		{
+			perror("fork create");
+			exit(0);
+		}
+		else if(pid == 0)
+		{
+
+			exit(0);
+		}else{
+			waitpid(pid,&stat,0);
+		}
+	}
+}
+void parallel_thread(int child,int n)
+{
+
 }
 
 
@@ -192,13 +230,12 @@ void serial_processing(Graph *g,int n){
 			}
 		}
 	}
-#if 1
 	for(int i=0; i<g->r; i++)
 	{
 		for(int j=0; j<g->w; j++)
 			g->matrix[i][j]=g->tmp[i][j];
 	}
-#endif
+
 	push_data(g,n);
 	serial_processing(g,n-1);
 
