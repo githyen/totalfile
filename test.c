@@ -112,27 +112,28 @@ int main(int argc, char **argv){
 		if(c==2) {	
 
 			get_data(argv[1]); 
-			printf("몇세대 진행 하시겠습니까?");
+			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
+
 			serial_processing(g,n);
 			free_g(g); 
 	//		printf("%c \n",i);
 		}
 		if(c==3) {
 			
-			printf("몇세대 진행 하시겠습니까?");
+			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
 
-			printf("몇개의 프로세스를 생성하시겠습니까?"); 
+			printf("how many process do you want to create?"); 
 			scanf("%d",&child);
 			parallel_processing(child,n);
 		}
 		if(c==4)
 		{
-			printf("몇세대 진행 하시겠습니까?");
+			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
 
-			printf("몇개의 프로세스를 생성하시겠습니까?"); 
+			printf("how many process do you want to create?"); 
 			scanf("%d",&child);
 			parallel_thread(child,n);
 
