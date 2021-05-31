@@ -13,7 +13,7 @@
 
 static Graph *g=NULL;
 static FILE *fp=NULL;
-static int r=0,w=0;
+
 static char i='1';
 
 void get_menu()
@@ -26,17 +26,29 @@ int get_neighbor(Graph *g,int r, int c);
 void get_data(char *fname);
 
 void serial_processing(Graph *g,int n);
-void parallel_processing(int child,int n);
+void parallel_processing(Graph *g,int child,int n);
 void parallel_thread(int child, int n);
-
+void print_data(Graph *g)
+{
+	for(int i=0; i<g->r; i++)
+	{
+		for(int j=0; j<g->w; j++)
+			printf("%d ",g->matrix[i][j]);
+		printf("\n");
+	}
+}
 void push_data(Graph *g,int n)
 {
-
-	
+#if 1
 	FILE *fp=NULL;
 	char fname[]="gen_1.matrix";
 	
 	fname[4]=i;
+	if(n==1)
+	{
+		memset(fname,0,strlen(fname));
+		memcpy(fname,"output.matrix",14);
+	}
 
 	if((fp=fopen(fname,"w"))==NULL)
 	{
@@ -53,14 +65,14 @@ void push_data(Graph *g,int n)
 	fclose(fp);
 	fp=NULL;
 	i++;
-
+#endif
 }
 
 void get_data(char *fname)
 {
 	char character;
-
-    fp=fopen(fname,"rt");
+	int r=0,w=0;
+    fp=fopen(fname,"r");
     
 	int fd=fileno(fp);
     if ((fd = open(fname,O_RDONLY)) < 0) {
@@ -114,19 +126,22 @@ int main(int argc, char **argv){
 			get_data(argv[1]); 
 			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
-
-			serial_processing(g,n);
+			if(n >= 1)
+				serial_processing(g,n);
 			free_g(g); 
-	//		printf("%c \n",i);
+			i='1';
 		}
 		if(c==3) {
-			
+
+			get_data(argv[1]);
 			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
 
 			printf("how many process do you want to create?"); 
 			scanf("%d",&child);
-			parallel_processing(child,n);
+			parallel_processing(g,child,n);
+			free_g(g);
+
 		}
 		if(c==4)
 		{
@@ -142,32 +157,76 @@ int main(int argc, char **argv){
    	exit(0);
 }
 
-void parallel_processing(int child,int n)
+void parallel_processing(Graph *g,int child,int n)
 {
+	if(n==0) return;
 
-	pid_t pid;
+	int count=0;
 	int stat;
-	for(int i=0; i<child; i++)
+	pid_t pid;
+	
+	if(g->r <= child)
 	{
-		if((pid=fork()) < 0)
+		pid=fork();
+		if(pid==0)
 		{
-			perror("fork create");
+				for(int i=1; i<g->r-1; i++)
+				{
+					for(int j=1; j<g->w-1; j++)
+					{
+						count=get_neighbor(g,i,j);
+						if(g->matrix[i][j])
+						{
+							if(count <= 2 || count >= 7)
+								g->tmp[i][j]=DEATH;
+							else if(count >= 3 && count <= 6)
+								g->tmp[i][j]=LIVE;
+						}else{
+							if(count == 4)
+								g->tmp[i][j]=LIVE;
+							else
+								g->tmp[i][j]=DEATH;
+						}
+					}
+				}
+				for(int i=0; i<g->r; i++)
+				{
+					for(int j=0; j<g->w; j++)
+						g->matrix[i][j]=g->tmp[i][j];
+				}
+	//		push_data(g,n);
+		//	print_data(g);
+			printf("pid : %d \n",getpid());
+			parallel_processing(g,child,n-1);
 			exit(0);
 		}
-		else if(pid == 0)
-		{
-
-			exit(0);
-		}else{
-			waitpid(pid,&stat,0);
-		}
+		else if(pid > 0) waitpid(pid,&stat,0);
+		else { perror("fork create"); exit(1); }
 	}
+#if 0
+	else if(g->r%child == 0)
+	{
+		int tmp=g->r/child;
+		for(int i=0; i<child; i++)
+		{
+			if((pid=fork()) > 0)
+				waitpid(pid,&stat,0);
+			else if(pid == 0)
+			{
+				for(int i=1; i<tmp; i++)
+				{
+					for(int j=1; j<g->w-1; j++)
+					{
+						count=get_neighbor(g,i,j);
+
+	}
+#endif
+	return;
 }
 void parallel_thread(int child,int n)
 {
 
 }
-
 
 void set_Edge(Graph *g)
 {
@@ -274,5 +333,4 @@ void free_g(Graph *G)
 		G->tmp=NULL;
 		free(G);
 }
-
 
