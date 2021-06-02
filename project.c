@@ -98,6 +98,7 @@ void set_process(int child,int get_mode)
 				y+=g->r/child;
 				exit(0);
 			}
+			exit(0);
 		}
 		else
 		{
@@ -194,7 +195,7 @@ int main(int argc, char **argv){
 	
 	if(argc == 1)
 	{
-		perror("error");
+		fprintf(stderr,"잘못된 접근 : 파일이름을 입력하세요.");
 		exit(1);
 	}
 	int c,n;
@@ -245,12 +246,14 @@ int main(int argc, char **argv){
 		}
 		if(c==4)
 		{
+			get_data(argv[1]);
 			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
 
 			printf("how many process do you want to create?"); 
 			scanf("%d",&child);
 			parallel_thread(child,n);
+			free_g(g);
 			i='1';
 
 		}
@@ -284,8 +287,29 @@ void parallel_thread(int child,int n)
 	pthread_attr_t attr;
 	int rc;
 
-//	pthread_attr_init(&attr);
-//	pthread_attr_setdetachstate(&attr,PTHREAD_CREATE_JOINABLE);
+	pthread_attr_init(&attr);
+	pthread_attr_setdetachstate(&attr,PTHREAD_CREATE_JOINABLE);
+	
+	for(int i=0; i<child; i++)
+	{
+		rc=pthread_create(&tid,&attr,set_thread,NULL);
+		
+		if(rc)
+		{
+			fprintf(stderr,"ERROR : return code from pthread_create() is %d \n",rc); 
+			exit(1);
+		}
+
+		rc=pthread_join(tid,NULL);
+
+		if(rc)
+		{
+			fprintf(stderr,"return code from pthread_join() is  %d \n",rc);
+		}
+	
+	}
+	pthread_attr_destroy(&attr);
+	pthread_exit(NULL);
 
 
 }

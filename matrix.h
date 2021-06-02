@@ -25,6 +25,9 @@ void print_data(Graph *);
 void push_data(Graph *g, int n);
 void get_matrix(int **, int i, int j, int count);
 void set_process(int child, int get_mode);
+
+void *set_thread();
+
 void set_Edge(Graph *);
 
 void free_g(Graph *);

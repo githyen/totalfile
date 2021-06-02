@@ -32,12 +32,17 @@ int main(){
                                         }
                                 }
                 }
+
+				for(int i=0; i<5; i++)
+					qsort(arr[i],6,sizeof(int),compare);
                 for(int i=0; i<5; i++)
                 {
-                        printf("%d ¼¼Æ® :",i+1);
+                        printf("%d set :",i+1);
                                 for(int j=0; j<6; j++)
                                 {
-                                                printf("%d ",arr[i][j]);
+											if(j==5) c=' ';
+											else c=',';
+                                                printf("%d%c ",arr[i][j],c);
                                 }
                                 printf("\n");
                 }
