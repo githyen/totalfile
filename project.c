@@ -16,7 +16,7 @@ static char i='1';
 
 void get_menu()
 {
-	printf("1.Program End\n2.순차처리\n3.프로세스 병렬처리\n4.쓰레드 병렬처리\n");
+	printf("1.프로그램 종료.\n2.순차처리.\n3.프로세스 병렬처리.\n4.쓰레드 병렬처리.\n");
 }
 
 int get_value(Graph *g,int r, int c);
@@ -115,12 +115,13 @@ void push_data(Graph *g,int n)
 #if 1
 	FILE *fp=NULL;
 	char fname[]="gen_1.matrix";
+	char out[]="output.matrix";
 	
 	fname[4]=i;
 	if(n==1)
 	{
 		memset(fname,0x00,strlen(fname));
-		memcpy(fname,"output.matrix",14);
+		memcpy(fname,out,strlen(out));
 	}
 
 	if((fp=fopen(fname,"w"))==NULL)
