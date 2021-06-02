@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<sys/wait.h>
 #include<fcntl.h>
+#include<pthread.h>
 #include<stdlib.h>
 #include<string.h>
 #include<unistd.h>
@@ -26,6 +27,8 @@ void get_data(char *fname);
 void serial_processing(Graph *g,int n);
 void parallel_processing(Graph *g,int child,int n);
 void parallel_thread(int child, int n);
+
+
 void get_matrix(int **ar, int i, int j,int count)
 {
 	if(ar[i][j])
@@ -45,6 +48,8 @@ void set_process(int child,int get_mode)
 	pid_t pid;
 	int y;
 	int count=0;
+
+	int stat;
 	for(int ch=0; ch<child; ch++)
 	{
 		if((pid=vfork()) < 0) { perror("error"); exit(1); }
@@ -95,7 +100,10 @@ void set_process(int child,int get_mode)
 			}
 		}
 		else
-			waitpid(pid,NULL,0);
+		{
+			waitpid(pid,&stat,0);
+	//		printf("parent process status : %d \n",stat);
+		}
 	}
 }
 
@@ -113,6 +121,7 @@ void print_data(Graph *g)
 void push_data(Graph *g,int n)
 {
 #if 1
+	set_Edge(g);
 	FILE *fp=NULL;
 	char fname[]="gen_1.matrix";
 	char out[]="output.matrix";
@@ -190,6 +199,9 @@ int main(int argc, char **argv){
 	}
 	int c,n;
 	int child;
+
+	struct timeval start,end;
+	double delay_time;
 	while(1)
 	{
 		get_menu();
@@ -198,6 +210,7 @@ int main(int argc, char **argv){
 		if(c==1) { break; }
 		if(c==2) {	
 
+			gettimeofday(&start,NULL);
 			get_data(argv[1]); 
 			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
@@ -205,17 +218,29 @@ int main(int argc, char **argv){
 				serial_processing(g,n);
 			free_g(g); 
 			i='1';
+			gettimeofday(&end,NULL);
+			delay_time=(end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1000000);
+			printf("%f seconds\n",delay_time);
+
 		}
 		if(c==3) {
 
+			gettimeofday(&start,NULL);
 			get_data(argv[1]);
+
+			
 			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
 
 			printf("how many process do you want to create?"); 
 			scanf("%d",&child);
+			
 			parallel_processing(g,child,n);
 			free_g(g);
+			i='1';
+			gettimeofday(&end,NULL);
+			delay_time=(end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1000000);
+			printf("%f seconds\n",delay_time);
 
 		}
 		if(c==4)
@@ -226,6 +251,7 @@ int main(int argc, char **argv){
 			printf("how many process do you want to create?"); 
 			scanf("%d",&child);
 			parallel_thread(child,n);
+			i='1';
 
 		}
 	}
@@ -248,11 +274,19 @@ void parallel_processing(Graph *g,int child,int n)
 		}
 		push_data(g,n);
 //		print_data(g);
-		putchar('\n');
+//		putchar('\n');
 		parallel_processing(g,child,n-1);
 }
 void parallel_thread(int child,int n)
 {
+
+	pthread_t tid;
+	pthread_attr_t attr;
+	int rc;
+
+//	pthread_attr_init(&attr);
+//	pthread_attr_setdetachstate(&attr,PTHREAD_CREATE_JOINABLE);
+
 
 }
 

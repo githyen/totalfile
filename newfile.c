@@ -6,6 +6,7 @@
 int main(){
 
 	int n,m;
+	printf("행과 열:");
 	scanf("%d %d",&n,&m);
 	
 	int arr[n][m];
