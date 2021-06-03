@@ -14,18 +14,40 @@ static Graph *g=NULL;
 static FILE *fp=NULL;
 static char i='1';
 
+static int avg[20]; 
+
 void get_menu()
 {
-	printf("1.Program End\n2.Serial Processing\n3.Process Parallel Processing\n4.Thread Parallel Processing\n");
+	printf("1.?꾨줈洹몃옩 醫낅즺\n2.?쒖감泥섎━\n3.?꾨줈?몄뒪 蹂묐젹泥섎━\n4.?곕젅??蹂묐젹泥섎━\n");
 }
 
 int get_value(Graph *g,int r, int c);
 int get_neighbor(Graph *g,int r, int c);
 void get_data(char *fname);
 
+void get_rvalue(int,int );
 void serial_processing(Graph *g,int n);
-void parallel_processing(Graph *g,int child,int n);
+void parallel_process(Graph *g,int child,int n);
 void parallel_thread(int child, int n);
+
+
+void get_rvalue(int row, int child)
+{
+	int i=1;
+
+	while(row--)
+	{
+		avg[i]+=1;
+		if(i==child) i=1;
+		else i++;
+	}
+
+	for(int i=1; i<=child; i++)
+		avg[i]+=avg[i-1];
+
+	avg[0]=1;
+}
+		
 void get_matrix(int **ar, int i, int j,int count)
 {
 	if(ar[i][j])
@@ -43,17 +65,15 @@ void get_matrix(int **ar, int i, int j,int count)
 void set_process(int child,int get_mode)
 {
 	pid_t pid;
-	int y;
 	int count=0;
+
+	int mode=0;
 	for(int ch=0; ch<child; ch++)
 	{
 		if((pid=vfork()) < 0) { perror("error"); exit(1); }
 		else if(pid==0)
 		{
-			if(ch==0)
-			{
-				y=g->r/child+get_mode;
-				for(int i=1; i<y; i++)
+				for(int i=avg[mode]; i<avg[mode+1]; i++)
 				{
 					for(int j=1; j<g->w-1; j++)
 					{
@@ -61,41 +81,13 @@ void set_process(int child,int get_mode)
 						get_matrix(g->matrix,i,j,count);
 					}
 				}
-				printf("process ID : %d \n",getpid());
 				exit(0);
-			}
-			if(ch==1)
-			{
-				for(int i=y; i<y+(g->r/child); i++)
-				{
-					for(int j=1; j<g->w-1; j++)
-					{
-						count=get_neighbor(g,i,j);
-						get_matrix(g->matrix,i,j,count);
-					}
-				}
-				printf("process ID : %d \n",getpid());
-				y+=g->r/child;
-				exit(0);
-			}
-
-			if(ch<child)
-			{
-				for(int i=y; i<y+(g->r/child); i++)
-				{
-					for(int j=1; j<g->w-1; j++)
-					{
-						count=get_neighbor(g,i,j);
-						get_matrix(g->matrix,i,j,count);
-					}
-				}
-				printf("process ID : %d \n",getpid());
-				y+=g->r/child;
-				exit(0);
-			}
 		}
-		else
+		else{
+			printf("Process ID : %d \n",pid);
+			mode++;
 			waitpid(pid,NULL,0);
+		}
 	}
 }
 
@@ -112,7 +104,6 @@ void print_data(Graph *g)
 }
 void push_data(Graph *g,int n)
 {
-#if 1
 	FILE *fp=NULL;
 	char fname[]="gen_1.matrix";
 	
@@ -138,13 +129,11 @@ void push_data(Graph *g,int n)
 	fclose(fp);
 	fp=NULL;
 	i++;
-#endif
 }
 
 void get_data(char *fname)
 {
 	char character;
-
     int r=0,w=0;
     fp=fopen(fname,"rt");
     
@@ -176,7 +165,6 @@ void get_data(char *fname)
 	fclose(fp);
 	fp = NULL;
 	return;
-	
 
 }
 
@@ -184,7 +172,7 @@ int main(int argc, char **argv){
 	
 	if(argc == 1)
 	{
-		perror("error");
+		fprintf(stderr,"?뚯씪?대쫫???낅젰?섏꽭??");
 		exit(1);
 	}
 	int c,n;
@@ -213,47 +201,34 @@ int main(int argc, char **argv){
 
 			printf("how many process do you want to create?"); 
 			scanf("%d",&child);
-			parallel_processing(g,child,n);
+			get_rvalue(g->r,child);
+			parallel_process(g,child,n);
 			free_g(g);
+			i='1';
 
 		}
 		if(c==4)
 		{
+			get_data(argv[1]);
 			printf("what generation would you like to proceed with??");
 			scanf("%d",&n);
 
 			printf("how many process do you want to create?"); 
 			scanf("%d",&child);
-			parallel_thread(child,n);
+			get_rvalue(g->r,child);
+
+			free_g(g);
 
 		}
 	}
    	exit(0);
 }
 
-void parallel_processing(Graph *g,int child,int n)
+void parallel_process(Graph *g,int child,int n)
 {
 		if(n==0) return;
-#if 1
-		if(g->r%child==0)
-			set_process(child,g->r%child);
 
-		if(g->r%child==1)
-			set_process(child,g->r%child);
-
-		if(g->r%child==2)
-			set_process(child,g->r%child);
-
-		if(g->r%child==3)
-			set_process(child,g->r%child);
-		
-		if(g->r%child==4)
-			set_process(child,g->r%child);
-
-		if(g->r%child==5)
-			set_process(child,g->r%child);
-
-#endif
+		set_process(child,g->r%child);
 
 		for(int i=0; i<g->r; i++)
 		{
@@ -262,14 +237,12 @@ void parallel_processing(Graph *g,int child,int n)
 		}
 //		push_data(g,n);
 		print_data(g);
-		putchar('\n');
-		parallel_processing(g,child,n-1);
+		parallel_process(g,child,n-1);
 }
 void parallel_thread(int child,int n)
 {
 
 }
-
 void set_Edge(Graph *g)
 {
 	for(int i=0; i<g->r; i++)
