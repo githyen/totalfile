@@ -262,7 +262,7 @@ int main(int argc, char **argv){
 
 			free_g(g);
 			file_count=1;
-			printf("thread parallel run time : %f seconds\n",d_time-3);
+			printf("thread parallel run time : %f seconds\n",d_time-child);
 
 		}
 	}
