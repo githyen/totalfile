@@ -224,7 +224,7 @@ int main(int argc, char **argv){
 			file_count=1;
 			gettimeofday(&end,NULL);
 			d_time=(end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1e6);
-			printf("process run time : %f seconds\n",d_time);
+			printf(" Sequential processing run time : %f seconds\n",d_time);
 		}
 		if(c==3) {
 
@@ -241,7 +241,7 @@ int main(int argc, char **argv){
 			d_time=(end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1e6);
 			free_g(g);
 			file_count=1;
-			printf("process run time : %f seconds\n",d_time);
+			printf("process parallel run time : %f seconds\n",d_time);
 
 		}
 		if(c==4)
@@ -262,7 +262,7 @@ int main(int argc, char **argv){
 
 			free_g(g);
 			file_count=1;
-			printf("thread run time : %f seconds\n",d_time-3);
+			printf("thread parallel run time : %f seconds\n",d_time-3);
 
 		}
 	}
