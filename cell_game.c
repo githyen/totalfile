@@ -43,12 +43,15 @@ void get_menu()
 
 int get_value(Graph *g,int r, int c);
 int get_neighbor(Graph *g,int r, int c);
+
 void get_data(char *fname);
 void get_rvalue(int,int );
 void get_matrix(int **,int,int,int);
 
 void *set_thread(void *arg);
 void set_Edge(Graph *);
+void set_process(int child,int get_mode);
+
 void serial_processing(Graph *g,int n);
 void parallel_process(Graph *g,int child,int n);
 void parallel_thread(int child, int n);
