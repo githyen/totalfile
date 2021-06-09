@@ -38,7 +38,7 @@ void changeSize(int width, int height)
 }
 
 void drawSnowMan()
-{   //¸Ó¸® ºÎºĞ
+{   	//Draw head
 	glColor3f(1, 1, 1);
 	glTranslatef(0, 0.75, 0);
 	glutWireSphere(0.75, 10, 10);
@@ -51,7 +51,7 @@ void drawSnowMan()
 	glutSolidSphere(0.25, 10, 10);
 	glTranslatef(-0.2, 0, 0);
 	glutSolidSphere(0.25, 10, 10);
-	//ÄÚ
+	//Draw nose
 	glPopMatrix();
 	glTranslatef(0, -0.1, 0.75);
 	glColor3f(1, 0, 0);
@@ -72,16 +72,16 @@ void display(void)
 
 	glLineWidth(15);
 
-	glBegin(GL_LINES); // Á¡°ú Á¡»çÀÌ ¿¬°á // °´Ã¼ ºÒ·¯¿Í¼­ ½ÃÀÛ
+	glBegin(GL_LINES); // ê°ì²´ ë¶ˆëŸ¬ì™€ì„œ ì‹œì‘
 	glColor3f(1, 1, 1);
-	glVertex3f(1.3, 1, 0); //ÆÈ°ú ´Ù¸®
+	glVertex3f(1.3, 1, 0); //íŒ”ê³¼ ë‹¤ë¦¬
 	glVertex3f(-1, 0, 0);
 	glVertex3f(1, 0, 0);
 	glVertex3f(-1.3, 1, 0);
 	glEnd();
 
 	glColor3f(0.5, 0.5, 0.5);
-	glBegin(GL_QUADS);	// ¸öÃ¼
+	glBegin(GL_QUADS);	// ëª¸ì²´
 	glVertex3f(-100, 0, -100);
 	glVertex3f(-100, 0, 100);
 	glVertex3f(100, 0, 100);
