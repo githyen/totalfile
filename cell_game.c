@@ -15,7 +15,7 @@
 typedef struct{
 		int r;
 		int w;
-		int n;
+		
 		int **matrix;
 		int **tmp;
 }Graph;
