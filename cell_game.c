@@ -73,6 +73,7 @@ void get_rvalue(int row, int child)
 		avg[i]+=avg[i-1];
 
 	avg[0]=1;
+	avg[child]=avg[child]-1;
 }
 		
 void get_matrix(int **ar, int i, int j,int count)
