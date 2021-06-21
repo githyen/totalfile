@@ -27,7 +27,7 @@ void free_g(Graph *);
 static Graph *g=NULL;
 static FILE *fp=NULL;
 int file_count=1;
-static int avg[20]; 
+static int avg[200]; 
 int array[size][size];
 
 int tmp[size][size]={0,};
