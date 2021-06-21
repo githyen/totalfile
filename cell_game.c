@@ -112,11 +112,10 @@ void set_process(int child,int get_mode)
 				_exit(0);
 		}
 		else{
-			if(kill(pid,SIGCHLD)!=0)
-				pause();
+			waitpid(pid,NULL,0);
 			printf("Process ID : %d \n",pid);
 			mode++;
-			waitpid(pid,NULL,0);
+			
 		}
 	}
 }
