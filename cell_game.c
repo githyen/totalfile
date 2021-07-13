@@ -41,9 +41,8 @@ void get_menu()
 	printf("1.PROGRAM END\n2.Sequential processing\n3.Process parallel\n4.Thread parallel\n");
 }
 
-int get_value(Graph *g,int r, int c);
+void tmp_data(Graph *g);
 int get_neighbor(Graph *g,int r, int c);
-
 void get_data(char *fname);
 void get_rvalue(int,int );
 void get_matrix(int **,int,int,int);
@@ -122,7 +121,7 @@ void set_process(int child,int get_mode)
 
 
 
-void print_data(Graph *g)
+void tmp_data(Graph *g)
 {
 	for(int i=0; i<g->r; i++)
 	{
@@ -258,7 +257,7 @@ int main(int argc, char **argv){
 			printf("how many thread do you want to create?"); 
 			scanf("%d",&child);
 			get_rvalue(g->r,child);
-			print_data(g);
+			tmp_data(g);
 			parallel_thread(child,n);
 			gettimeofday(&end,NULL);
 			d_time=(end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1e6);
