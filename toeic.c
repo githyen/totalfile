@@ -44,6 +44,7 @@ int main(){
 	}
 	int sel;
 	fclose(fp);
+	fp=NULL;
 	while(1)
 	{
 		printf("1.kor\n2.eng\n");
