@@ -10,6 +10,7 @@ typedef struct{
 
 	char Eng[20];
 	char Kor[60];
+	char total_kor[60];
 	int file_count;
 	char tmp[4][60];
 
@@ -34,6 +35,7 @@ int main(){
 	char *p;
 	while(fscanf(fp,"%d %s %s",&list[i].file_count,list[i].Eng,list[i].Kor)!=EOF)
 	{
+		strcpy(list[i].total_kor,list[i].Kor);
 		p=strtok(list[i].Kor,",");
 		if(p) {	strcpy(list[i].tmp[0],p); }
 		while(p!=NULL) {
@@ -47,7 +49,7 @@ int main(){
 	fp=NULL;
 	while(1)
 	{
-		printf("1.kor\n2.eng\n");
+		printf("1.한글맞추기\n2.영어맞추기\n");
 		scanf("%d",&sel);
 
 		if(sel==1) get_kor(i);
@@ -74,7 +76,12 @@ void get_eng(int count)
 		{
 			printf("맞았습니다\n");
 			word_count++;
-		}else printf("틀렸습니다\n");
+		}else{
+			printf("틀렸습니다\n");
+			printf("-------------------\n");
+			printf("%s, %s, %s\n",list[i].tmp[0],list[i].tmp[1],list[i].tmp[2]);
+			printf("-------------------\n");
+		}
 	}
 
 	printf("총 %d개 중 %d개 맞았습니다.\n틀린 개수 %d 개\n",count,word_count,count-word_count);
@@ -87,14 +94,19 @@ void get_kor(int count)
 	char str[20];
 	for(int i=0; i<count; i++)
 	{
-		printf("%s -->",list[i].Kor);
+		printf("%s -->",list[i].total_kor);
 		scanf("%s",str);
 		if(strcmp(str,"quit")==0) break;
 		if(strcmp(list[i].Eng,str)==0)
 		{
 			printf("맞았습니다\n");
 			word_count++;
-		}else printf("틀렸습니다\n");
+		}else {
+			printf("틀렸습니다\n");
+			printf("-------------------\n");
+			printf("%s \n",list[i].Eng);
+			printf("-------------------\n");
+		}
 	}
 
 	printf("총 %d개 중 %d개 맞았습니다.\n틀린 개수 %d 개\n",count,word_count,count-word_count);
