@@ -9,10 +9,10 @@
 typedef struct{
 
 	char Eng[20];
-	char Kor[60];
-	char total_kor[60];
+	char Kor[100];
+	char total_kor[100];
 	int file_count;
-	char tmp[4][60];
+	char tmp[4][100];
 
 }Data;
 Data list[100];
@@ -20,12 +20,12 @@ Data list[100];
 void get_eng(int);
 void get_kor(int);
 
-int main(){
+int main(int argc, char **argv){
 
 	FILE *fp=NULL;
 	char str[100];
 
-	if((fp=fopen("dic.txt","rt")) == NULL)
+	if((fp=fopen(argv[1],"rt")) == NULL)
 	{
 		perror("open");
 		exit(1);
@@ -33,6 +33,8 @@ int main(){
 	int i=0;
 	int r=1;
 	char *p;
+
+#if 1
 	while(fscanf(fp,"%d %s %s",&list[i].file_count,list[i].Eng,list[i].Kor)!=EOF)
 	{
 		strcpy(list[i].total_kor,list[i].Kor);
@@ -40,10 +42,11 @@ int main(){
 		if(p) {	strcpy(list[i].tmp[0],p); }
 		while(p!=NULL) {
 			p=strtok(NULL,",");
-			if(p) {	strcpy(list[i].tmp[r],p); }
+			if(p) {	strcpy(list[i].tmp[r],p);  }
 		}
 		i++;
 	}
+#endif
 	int sel;
 	fclose(fp);
 	fp=NULL;
