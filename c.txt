@@ -1,82 +1,82 @@
-sophisticated 복잡한,정교한,세련된
-timely 때에맞춘,적절한시기에
-lealistcally 현실적으로
-promptly 즉시,정각에
-accessible 출입할수있는,이용할수있는
-implement 실시하다,실행하다
-feedback 의견,반응
-outstanding 우수한,미지불된
-inform 에게-알리다
-replacement 교체,후임자
-announcement 공고,발표
-department 바서
-permanently 영구적으로,불변으로
-fulfill 만족시키다,이행하다,지키다
-outline 개요
-explain 설명하다
-demonstrate 증명하다,설명하다
-contain 포함하다
-compile 편집하다,모으다
-subsequent 그다음의,차후의
-overview 개요,개관
-provider 공급자,제공자
-matter 문제,일
-expertise 전문기술,전문지식
-remainder 나머지
-essential 필수적인,본질적인
-divide 나누다,분배하다
-major 주요한,중대한
-compliance 준수
-follow 을따라가다,주시하다
-face 직면하다,마주보다,향하다
-clarify 명확하게하다
-aspect 관점,국면
-apparently 보기에-한듯한,외관상으로는
-aware 알고있는,인식하고있는
-extended 연장한,연기한
-accidentally 우연히,뜻하지않게
-speak 말하다,이야기하다
-concerned 염려하는,걱정하는,관련된
-advisable 바람직한,합당한
-rest 쉬다,휴식을취하다
-exhibition 전시회
-celebrity 명사,유명인사
-live 생방송중인
-improvise 즉석에서만들다,즉흥적으로하다
-popular 인기있는
-donation 기증,기부
-alumni 동창생들,졸압생들
-present 제시하다
-admission 입장
-banquet 연회,만찬
-anniversary 기념일
-required 필수의,의무적인
-succeed 성공하다,뒤를잇다
-collection 소장품,수집품,징수
-fund-raising 모금
-resume 재개하다,다시시작하다
-issue 문제,쟁점
-subscription 구독
-appear 나타나다,출연하다
-accompany 동행하다,동반하다
-edition 판
-specifically 명확하게,분명히,특별히,특히
-anonymous 익명의,이름이없는
-commit 헌신하다,전념하다
-informative 유익한,정보를주다
-audience 청중,군중
-author 작가,저자
-note 주목하다,특별히언급하다
-antique 골동품
-manuscript 원고
-beneficial 유익한,이익이되는
-upcoming 곧있을,다가올
-lend 빌려주다
-current 현재의,현행의
-local 지방의,고장의
-variety 다양성,변화,종류,품종
-advocate 옹호자
-contributor 기부자,공헌자
-defy 저항하다
-showing 전시,상영
-fascinating 매혹적인
+1 sophisticated 복잡한,정교한,세련된
+2 timely 때에맞춘,적절한시기에
+3 lealistcally 현실적으로
+4 promptly 즉시,정각에
+5 accessible 출입할수있는,이용할수있는
+6 implement 실시하다,실행하다
+7 feedback 의견,반응
+8 outstanding 우수한,미지불된
+9 inform 에게-알리다
+10 replacement 교체,후임자
+11 announcement 공고,발표
+12 department 바서
+13 permanently 영구적으로,불변으로
+14 fulfill 만족시키다,이행하다,지키다
+15 outline 개요
+16 explain 설명하다
+17 demonstrate 증명하다,설명하다
+18 contain 포함하다
+19 compile 편집하다,모으다
+20 subsequent 그다음의,차후의
+21 overview 개요,개관
+22 provider 공급자,제공자
+23 matter 문제,일
+24 expertise 전문기술,전문지식
+25 remainder 나머지
+26 essential 필수적인,본질적인
+27 divide 나누다,분배하다
+28 major 주요한,중대한
+29 compliance 준수
+30 follow 을따라가다,주시하다
+31 face 직면하다,마주보다,향하다
+32 clarify 명확하게하다
+33 aspect 관점,국면
+34 apparently 보기에-한듯한,외관상으로는
+35 aware 알고있는,인식하고있는
+36 extended 연장한,연기한
+37 accidentally 우연히,뜻하지않게
+38 speak 말하다,이야기하다
+39 concerned 염려하는,걱정하는,관련된
+40 advisable 바람직한,합당한
+41 rest 쉬다,휴식을취하다
+42 exhibition 전시회
+43 celebrity 명사,유명인사
+44 live 생방송중인
+45 improvise 즉석에서만들다,즉흥적으로하다
+46 popular 인기있는
+47 donation 기증,기부
+48 alumni 동창생들,졸압생들
+49 present 제시하다
+50 admission 입장
+51 banquet 연회,만찬
+52 anniversary 기념일
+53 required 필수의,의무적인
+54 succeed 성공하다,뒤를잇다
+55 collection 소장품,수집품,징수
+56 fund-raising 모금
+57 resume 재개하다,다시시작하다
+58 issue 문제,쟁점
+59 subscription 구독
+60 appear 나타나다,출연하다
+61 accompany 동행하다,동반하다
+62 edition 판
+63 specifically 명확하게,분명히,특별히,특히
+64 anonymous 익명의,이름이없는
+65 commit 헌신하다,전념하다
+66 informative 유익한,정보를주다
+67 audience 청중,군중
+68 author 작가,저자
+69 note 주목하다,특별히언급하다
+70 antique 골동품
+71 manuscript 원고
+72 beneficial 유익한,이익이되는
+73 upcoming 곧있을,다가올
+74 lend 빌려주다
+75 current 현재의,현행의
+76 local 지방의,고장의
+77 variety 다양성,변화,종류,품종
+78 advocate 옹호자
+79 contributor 기부자,공헌자
+80 defy 저항하다
+81 showing 전시,상영
+82 fascinating 매혹적인
