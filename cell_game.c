@@ -41,19 +41,19 @@ void get_menu()
 	printf("1.PROGRAM END\n2.Sequential processing\n3.Process parallel\n4.Thread parallel\n");
 }
 
-int get_neighbor(Graph *g,int r, int c);
+int get_neighbor(Graph *g,int r, int c); // 이웃 세포가 살아있는지 죽어있는지 체크 할 함수
 
-void get_data(char *fname);
-void get_rvalue(int,int );
-void get_matrix(int **,int,int,int);
+void get_data(char *fname); //  matrix 파일에서 데이터 가져오기
+void get_rvalue(int,int ); //  병렬처리를 위해 값을 균등하게 나누기
+void get_matrix(int **,int,int,int); // 현재 위치 세포가 살아있을때와 죽어있을 때 체크
 
-void *set_thread(void *arg);
-void set_Edge(Graph *);
-void set_process(int child,int get_mode);
+void *set_thread(void *arg); // 쓰레드 병렬처리
+void set_Edge(Graph *); // 가로,세로 가장자리 끝 0으로 셋팅
+void set_process(int child,int get_mode); // 프로세스 병렬처리
 
-void serial_processing(Graph *g,int n);
-void parallel_process(Graph *g,int child,int n);
-void parallel_thread(int child, int n);
+void serial_processing(Graph *g,int n); //순차처리
+void parallel_process(Graph *g,int child,int n); // 프로세스 병렬처리
+void parallel_thread(int child, int n); // 쓰레드 병렬처리
 
 
 
