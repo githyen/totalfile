@@ -4,7 +4,6 @@
 #include<sys/types.h>
 #include<string.h>
 #include<sys/stat.h>
- 
 int main(int argc,char **argv)
 {        
     if(argc != 3)
@@ -39,7 +38,7 @@ int main(int argc,char **argv)
 	}
 	else
 	{
-		fprintf(stderr,"chmod: Àß¸øµÈ ¸ðµå: `%s' \n",argv[1]);
+		fprintf(stderr,"chmod: Ã€ÃŸÂ¸Ã¸ÂµÃˆ Â¸Ã°ÂµÃ¥: `%s' \n",argv[1]);
 		fprintf(stderr,"Try 'chmod --help' for more information.\n");
 		exit(1);
 	}
