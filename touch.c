@@ -8,19 +8,18 @@
 #include<sys/time.h>
 #include<unistd.h>
 #include<fcntl.h>
-
 int main(int argc, char **argv)
 {
 	
 	struct utimbuf ubuf;
 	if(argc == 0)
 	{
-		fprintf(stderr,"touch: ÆÄÀÏ ¸í·É¾î ´©¶ô\nTry 'touch --help' for more information.\n");
+		fprintf(stderr,"touch: íŒŒì¼ ëª…ë ¹ì–´ ëˆ„ë½\nTry 'touch --help' for more information.\n");
 		exit(1);
 	}
 	if(strncmp(argv[1],"--",2) == 0)
 	{
-		fprintf(stderr,"touch: ÀÎ½ÄÇÒ ¼ö ¾ø´Â ¿É¼Ç '%s'\nTry 'touch --help' for more information.\n",argv[1]);
+		fprintf(stderr,"touch: ì¸ì‹í•  ìˆ˜ ì—†ëŠ” ì˜µì…˜ '%s'\nTry 'touch --help' for more information.\n",argv[1]);
 		exit(1);
 	}
 	for(int i=0; i<argc; i++)
