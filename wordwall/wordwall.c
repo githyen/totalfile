@@ -23,9 +23,7 @@ void get_kor(int);
 void detach(int size);
 
 void *set_time(void *);
-
 static int timer=5;
-
 int compare(const void *a, const void *b)
 {
 	return (strcmp((char *)a,(char *)b));
