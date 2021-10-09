@@ -102,7 +102,7 @@ void random_num(int *list,int n)
 	{
 		j=rand()%n;
 		k=rand()%n;
-		swap(&list[i],&list[k]);
+		swap(&list[j],&list[k]);
 	}
 	return;
 
