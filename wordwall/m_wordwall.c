@@ -5,7 +5,6 @@
 #include<time.h>
 
 #define OUT(x...) fprintf(stderr,x)
-
 typedef struct{
 
 	char Eng[30];
