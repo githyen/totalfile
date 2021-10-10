@@ -25,7 +25,7 @@ void detach(int size);
 
 void random_num(int *,int );
 
-int check_word(Data *list, int size);
+int inaccurate_word(Data *list, int size);
 
 int compare(const void *a, const void *b)
 {
@@ -140,10 +140,10 @@ void get_eng(int count)
         }
 
         OUT("총 %d개 중 %d개 맞았습니다.\n틀린 개수 %d 개\n",count,word_count,count-word_count);
-        check_word(get_word,r);
+        inaccurate_word(get_word,r);
 }
 
-int check_word(Data *list,int size)
+int inaccurate_word(Data *list,int size)
 {
         FILE *fp=NULL;
 
