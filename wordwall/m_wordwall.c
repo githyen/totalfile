@@ -148,7 +148,7 @@ int check_word(Data *list,int size)
         FILE *fp=NULL;
 
 
-        if((fp=fopen("incorrect.txt","wt"))==NULL)
+        if((fp=fopen("incorrect.txt","at"))==NULL)
         {
                 perror("error");
                 exit(1);
