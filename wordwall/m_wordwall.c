@@ -65,7 +65,7 @@ int main(int argc, char **argv){
 
 void detach(int size)
 {
-#ifdef SORT
+#ifdef SORT                     // gcc -D SORT
         qsort(W,size,sizeof(W[0]),compare);
 #endif
 
@@ -77,14 +77,13 @@ void detach(int size)
 
                 p=strtok(W[i].Kor,",");
 
-                if(p)   strcpy(W[i].tmp[r],p);
+                if(p)   memcpy(W[i].tmp[r],p,strlen(p)+1);
 
                 while(p!=NULL) {
 
                         p=strtok(NULL,",");
 
-                        if(p) { strcpy(W[i].tmp[++r],p); }
-
+                        if(p) { memcpy(W[i].tmp[++r],p,strlen(p)+1); }
                 }
                 r=0;
         }
@@ -111,7 +110,7 @@ void get_eng(int count)
         Data get_word[count];
         int word_count=0;
 
-#ifdef RANDOM
+#ifdef RANDOM //gcc -D RANDOM
         int pos[count];
         random_num(pos,count);
 #endif
@@ -119,7 +118,7 @@ void get_eng(int count)
         int pos[count]; for(int i=0; i<count; i++) pos[i]=i;
 #endif
         int r=0;
-        char str[20];
+        char str[30];
         for(int i=0; i<count; i++)
         {
                 OUT("%s -->",W[pos[i]].Eng);
