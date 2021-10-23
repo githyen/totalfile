@@ -5,7 +5,6 @@
 
 int arr[10000][10000];
 int main(){
-
 	int n,m;
 	printf("number two:");
 	scanf("%d %d",&n,&m);
