@@ -11,7 +11,6 @@
 #define LIVE 1
 #define DEATH 0
 
-
 typedef struct{
 		int r;
 		int w;
