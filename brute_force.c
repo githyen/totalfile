@@ -14,7 +14,7 @@ int main(){
         getchar();
         scanf("%[^\n]",str2);
 
-        int idx=bf_match(str1,str2);
+        bf_match(str1,str2);
 
         if(count==0)
                 printf("-1\n");
