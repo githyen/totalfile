@@ -19,22 +19,22 @@ typedef struct{
 		int **tmp;
 }Graph;
 
-
-Graph *init(int,int);
-void free_g(Graph *);
+Graph *init_matrix(int,int);
+void destroy_matrix(Graph *);
 
 static Graph *g=NULL;
 static FILE *fp=NULL;
+
 int file_count=1;
+int flag_mode=0x00;
+
 static int avg[200]; 
 int array[size][size];
-
 int tmp[size][size]={0,};
-
-int flag_mode=0x00;
 
 pthread_mutex_t mutex=PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond=PTHREAD_COND_INITIALIZER;
+
 void get_menu()
 {
 	printf("1.PROGRAM END\n2.Sequential processing\n3.Process parallel\n4.Thread parallel\n");
@@ -53,8 +53,6 @@ void set_process(int child,int get_mode); // 프로세스 병렬처리
 void serial_processing(Graph *g,int n); //순차처리
 void parallel_process(Graph *g,int child,int n); // 프로세스 병렬처리
 void parallel_thread(int child, int n); // 쓰레드 병렬처리
-
-
 
 void get_rvalue(int row, int child)
 {
@@ -118,8 +116,6 @@ void set_process(int child,int get_mode)
 	}
 }
 
-
-
 void print_data(Graph *g)
 {
 	for(int i=0; i<g->r; i++)
@@ -128,6 +124,7 @@ void print_data(Graph *g)
 			array[i][j]=g->matrix[i][j];
 	}
 }
+
 void push_data(Graph *g,int n)
 {
 	set_Edge(g);
@@ -180,7 +177,7 @@ void get_data(char *fname)
 
     }
     close(fd);
-	g=init(r,w/(r*2));
+	g=init_matrix(r,w/(r*2));
     
 	for(int i=0; i<g->r; i++)
     {
@@ -221,7 +218,7 @@ int main(int argc, char **argv){
 			scanf("%d",&n);
 			if(n >= 1)
 				serial_processing(g,n);
-			free_g(g); 
+			destroy_matrix(g); 
 			file_count=1;
 			gettimeofday(&end,NULL);
 			d_time=(end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1e6);
@@ -240,7 +237,7 @@ int main(int argc, char **argv){
 			parallel_process(g,child,n);
 			gettimeofday(&end,NULL);
 			d_time=(end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1e6);
-			free_g(g);
+			destroy_matrix(g);
 			file_count=1;
 			printf("process parallel run time : %f seconds\n",d_time);
 
@@ -261,7 +258,7 @@ int main(int argc, char **argv){
 			gettimeofday(&end,NULL);
 			d_time=(end.tv_sec - start.tv_sec) + ((end.tv_usec - start.tv_usec) / 1e6);
 
-			free_g(g);
+			destroy_matrix(g);
 			file_count=1;
 			printf("thread parallel run time : %f seconds\n",d_time-n);
 
@@ -312,14 +309,14 @@ void parallel_thread(int child,int n)
 		}
 	}
 
-	/* max os 일 때 run */
-#if 1
+	/* mac os 일 때 run */
+#ifdef MAC // gcc -D MAC
 	pthread_mutex_destroy(&mutex);
 	pthread_cond_destroy(&cond);
 #endif
 
 	/* linux/unix  일 때 run */
-#if 0
+#ifdef LINUX // gcc -D LINUX
 	if(pthread_cond_destroy(&cond))
 	{
 		fprintf(stderr,"cond destroy error \n");
@@ -449,7 +446,7 @@ void serial_processing(Graph *g,int n){
 
 }
 
-Graph *init(int r, int w)
+Graph *init_matrix(int r, int w)
 {
 		Graph *new=(Graph *)malloc(sizeof(Graph));
 		
@@ -467,7 +464,7 @@ Graph *init(int r, int w)
 		return new;
 }
 
-void free_g(Graph *G)
+void destroy_matrix(Graph *G)
 {
 		for(int i=0; i<G->r; i++)
 		{
