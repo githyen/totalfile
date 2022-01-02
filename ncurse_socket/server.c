@@ -82,9 +82,7 @@ void *snd_msg(void *get_sock)
 		mvwprintw(in,1,1,"ENTER:");
 		mvwgetstr(in,1,7,msg);
 		
-/*
-		if(NULL != strstr(msg,"exit")) { 
-*/
+
 		if(strncmp(msg,"exit",4)==0)
 		{
 			endwin();
