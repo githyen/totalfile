@@ -5,7 +5,6 @@
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 #endif
-
 void error_control(char *error);
 void *rcv_msg(void *);
 void *snd_msg(void *);
