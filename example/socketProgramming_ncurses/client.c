@@ -66,8 +66,6 @@ void *snd_msg(void *data)
         char my_msg[msg_size*2]="";
         char *encrypted = NULL;
 
-//      write(pdata.sock,pdata.user_name,strlen(pdata.user_name));
-
         while(1)
         {
                 mvwprintw(in,1,1,"ENTER:");
