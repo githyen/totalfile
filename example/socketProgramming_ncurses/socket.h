@@ -82,9 +82,9 @@ void get_window(char *Name,char *Name1)
     initscr();
     refresh();
 
-        user_list = newwin(LINES-41,COLS-1,1,0);
-        box(user_list,0,0);
-        wrefresh(user_list);
+    user_list = newwin(LINES-41,COLS-1,1,0);
+    box(user_list,0,0);
+    wrefresh(user_list);
 
     out = newwin(LINES - 17,COLS-1,11,1);
     scrollok(out,TRUE);
@@ -99,14 +99,14 @@ void get_window(char *Name,char *Name1)
     box(in,0,0);
     wrefresh(in);
 
-        mvwprintw(user_list,1,1," [USER_LIST]");
-        mvwprintw(user_list,2,1," -%s-",Name);
-        mvwprintw(user_list,3,1," -%s-",Name1);
-        wprintw(out,"------------------------------\n");
-        wprintw(out,"---Close Chat Window (exit)---\n");
-        wprintw(out,"------------------------------\n");
-        wrefresh(out);
-        wrefresh(user_list);
+    mvwprintw(user_list,1,1," [USER_LIST]");
+    mvwprintw(user_list,2,1," -%s-",Name);
+    mvwprintw(user_list,3,1," -%s-",Name1);
+    wprintw(out,"------------------------------\n");
+    wprintw(out,"---Close Chat Window (exit)---\n");
+    wprintw(out,"------------------------------\n");
+    wrefresh(out);
+    wrefresh(user_list);
 
 }
 
