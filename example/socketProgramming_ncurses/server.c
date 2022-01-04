@@ -83,8 +83,8 @@ void *snd_msg(void *get_sock)
         {
                 mvwprintw(in,1,1,"ENTER:");
                 mvwgetstr(in,1,7,msg);
-                /* input 데이터가 "exit"와 같으면 window 창 닫고
-                   종료 프로토콜 때문에 "exit"라는 데이터를 보고 프로그램 종료 */
+                /* input 데이터가 "exit"라느 문자열과 같으면 window 창 닫고
+                   종료 때문에 "exit"라는 데이터를 보고 프로그램 종료 */
                 if(strncmp(msg,"exit",4)==0)
                 {
                         endwin();
@@ -138,7 +138,7 @@ void *rcv_msg(void *get_sock)
                         return NULL;
                 }
 
-                /* 종료 프로토콜을 위해 "exit라는 문자열을 받 았을 때 같으면
+                /* 받으 데이터가 "exit라는 문자열을 받 았을 때 같으면
                    window 닫고 프로그램 종료 */
                 if(strncmp(msg,"exit",4)==0) {
 
