@@ -19,7 +19,7 @@ Plugin 'bling/vim-airline' " lean & mean status/tabline for vim that's light as 
 Plugin 'vim-airline/vim-airline-themes' "https://github.com/vim-airline/vim-airline-themes
 Plugin 'fugitive.vim' " a Git wrapper so awesome, it should be illegal
 Plugin 'nathanaelkane/vim-indent-guides' " A Vim plugin for visually displaying indent levels in code
-Plugin 'neocomplcache' " Ultimate auto-completion system for Vim
+"Plugin 'neocomplcache' " Ultimate auto-completion system for Vim
 Plugin 'terryma/vim-multiple-cursors' " True Sublime Text style multiple selections for Vim
 Plugin 'scrooloose/nerdcommenter' " Vim plugin for intensely orgasmic commenting
 Plugin 'sheerun/vim-polyglot' " A solid language pack for Vim
@@ -79,6 +79,8 @@ set lazyredraw " lz; 매크로 실행중에 화면을 다시 그리지 않음 "
 set showcmd "sc; 상태 표시줄에 (입력중인) 명령을 표시. 근데 무슨 차이인지 모르겠음.
 set laststatus=2 " ls; 상태 표시줄을 항상 보이도록
 set wildmenu
+set shortmess=a
+set cmdheight=2
 set mouse-=a
 set mouse=c
 set wildmode:list:longest,full " wmnu; 명령줄 자동 완성 시 메뉴를 사용
@@ -230,22 +232,22 @@ let g:indent_guides_guide_size = 1
 
 " neocomplcache
 let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 2
-let g:neocomplcache_enable_camel_case_completion = 1
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_min_syntax_length = 2
+"let g:neocomplcache_enable_camel_case_completion = 1
 if !exists('g:neocomplcache_wildcard_characters')
   let g:neocomplcache_wildcard_characters = {}
 endif
-let g:neocomplcache_wildcard_characters._ = '-'
-let g:neocomplcache_enable_underbar_completion = 1
+"let g:neocomplcache_wildcard_characters._ = '-'
+"let g:neocomplcache_enable_underbar_completion = 1
 " neocomplcache와 함께 <TAB>키로 자동완성하기 위해 필수
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-inoremap <expr><C-e>  neocomplcache#cancel_popup()
+"inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+"inoremap <expr><C-y>  neocomplcache#close_popup()
+"inoremap <expr><C-e>  neocomplcache#cancel_popup()
 
 " omni completion. 
 set omnifunc=syntaxcomplete#Complete
