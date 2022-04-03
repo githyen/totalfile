@@ -102,7 +102,7 @@ set ffs=unix,mac,dos
 " xmllint
 map <F9> <Esc>:1,$!xmllint --format -<CR>
 " indentation
-map <F2> <Esc>:set ts=2<CR>:set sw=2<CR>
+map <F2> <Esc>:set ts=4<CR>:set sw=4<CR>
 map <F4> <Esc>:set ts=4<CR>:set sw=4<CR>
 
 " leader 키 설정(기본키는 \)
@@ -195,11 +195,11 @@ set visualbell " vb; 오류음 대신 비주얼벨 사용.
 set ruler " ru; 상태표시줄 오른쪽에 커서의 위치를 보여줌.
 set backspace=2 " bs; indent,eol,start. Backspace 키 동작 방식
 set hlsearch " hls; 검색어 하이라이팅
-set linespace=1 " lsp; 줄간격 "
+set linespace=4 " lsp; 줄간격 "
 set ignorecase " ic; 찾기할 때 대소문자 구분하지 않음
-set tabstop=2 " ts; <TAB> 간격"
-set shiftwidth=2 " sw; 자동 들여쓰기 간격 "
-set softtabstop=2 " sts; 편집 시 <Tab>을 누르면 들어가는 공백의 수
+set tabstop=4 " ts; <TAB> 간격"
+set shiftwidth=4 " sw; 자동 들여쓰기 간격 "
+set softtabstop=4 " sts; 편집 시 <Tab>을 누르면 들어가는 공백의 수
 set autoindent " 새로운 줄의 들여쓰기를 이전 줄에서 가져옴
 set cindent " C 언어 스타일 자동 들여쓰기
 set smartindent "cindent 와 비슷 하지만 #if, #ifdef, #define 등과 #으로 시작하는 전처리기 명령어에 대해서는 자동 들여쓰기를 무시하고 다음 라인의 첫번째 열로 이동한다.
