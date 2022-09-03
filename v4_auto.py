@@ -24,29 +24,12 @@ class Run_Thread(QThread):
         
     def run(self):
         while True:
-            #-----------deprecated--------------
-            # 해상도 1920 x 1080
-            #x = random.randrange(0,1080)
-            #y = random.randrange(0,1920)
-            #h = random.randrange(0,1080)
-            #w = random.randrange(0,1920)
-    
-            #pyautogui.moveTo(x,y,1)
-            #time.sleep(3)
-            #pyautogui.moveTo(h,w,1)
-            #time.sleep(3)
-            #------------------------------------
+           
    
             # 현재 시간
             current_time = datetime.now()
             
-            #-----------deprecated--------------
-            #메모장 작업표시줄 위치 x=495, y=1044
-            #pyautogui.click(x=495,y=1044,button='left')
-            #time.sleep(1)
-            #------------------------------------
-
-
+         
             # ----------------------------------------------------------
             #version 4 update
             #C:\Windows\System32\notepad.exe Run
@@ -74,12 +57,7 @@ class Run_Thread(QThread):
             time.sleep(3)
             # ----------------------------------------------------------
 
-            #-----------deprecated--------------
-            # window X(exit) 위치 x=1578,y=90
-            #pyautogui.click(x=1578,y=90,button='left')
-            #time.sleep(3)
-            #pyautogui.click(x=978,y=529,button='left')
-            #------------------------------------
+          
             
             # ----------------------------------------------------------
             #exit notepad.exe
