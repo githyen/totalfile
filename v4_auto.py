@@ -36,14 +36,14 @@ class Run_Thread(QThread):
             programName = "notepad.exe"
             sp.Popen([programName, ""])
             time.sleep(1)
-            # 메모장 클릭
             # ----------------------------------------------------------
-
+	    
+	    # 메모장 클릭
             # ----------------------------------------------------------
             pyautogui.click(x=917,y=597,button='left')
             time.sleep(1)
 
-            # 메모장 write
+            # 메모장 write (test text)
             pyautogui.typewrite('Lorem ipsum dolor sit amet,consectetuer\n'
                                 'adipiscing elit. Aenean commodo ligula eget dolor.\n'
                                 'Aenean massa. Cum sociis natoque penatibus et\n'
