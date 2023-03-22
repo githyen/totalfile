@@ -1,5 +1,6 @@
 install : git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ----
+
 setting : 
 " VIM 옵션
 syntax on						" 구문강조 사용
